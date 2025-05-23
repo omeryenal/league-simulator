@@ -28,29 +28,30 @@ func withCORS(handler http.HandlerFunc) http.HandlerFunc {
 }
 
 func main() {
-	// Initialize the database and create tables if not exist
+	// Initialize the database and create tables if they don't exist
 	db.InitDB()
-	fmt.Println("Database connected and tables created.")
+	fmt.Println("✅ Database connected and tables initialized.")
 
-	// Health check
+	// Health check endpoint
 	http.HandleFunc("/ping", withCORS(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "pong")
 	}))
 
 	// League-related endpoints
-	http.HandleFunc("/teams", withCORS(handlers.GetTeams))
-	http.HandleFunc("/standings", withCORS(handlers.GetStandings))
-	http.HandleFunc("/week/current", withCORS(handlers.GetCurrentWeek))
-	http.HandleFunc("/simulate/next", withCORS(handlers.SimulateNextWeek))
-	http.HandleFunc("/simulate/all", withCORS(handlers.SimulateAll))
-	http.HandleFunc("/reset", withCORS(handlers.ResetSeason))
-	http.HandleFunc("/results/week/", withCORS(handlers.GetWeekResults))
-	http.HandleFunc("/predictions", withCORS(handlers.GetPredictions))
+	http.HandleFunc("/teams", withCORS(handlers.GetTeams))                 // GET
+	http.HandleFunc("/standings", withCORS(handlers.GetStandings))         // GET
+	http.HandleFunc("/week/current", withCORS(handlers.GetCurrentWeek))    // GET
+	http.HandleFunc("/simulate/next", withCORS(handlers.SimulateNextWeek)) // POST
+	http.HandleFunc("/simulate/all", withCORS(handlers.SimulateAll))       // POST
+	http.HandleFunc("/reset", withCORS(handlers.ResetSeason))              // POST
+	http.HandleFunc("/results/week/", withCORS(handlers.GetWeekResults))   // GET
+	http.HandleFunc("/predictions", withCORS(handlers.GetPredictions))     // GET
 
 	// Manual match control
 	http.HandleFunc("/match", withCORS(handlers.CreateMatch))        // POST /match
 	http.HandleFunc("/match/", withCORS(handlers.UpdateMatchResult)) // PUT /match/{id}
 
-	log.Println("Server is running at http://localhost:8080")
+	// Start the server
+	log.Println("🚀 Server is running at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
