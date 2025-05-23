@@ -8,7 +8,7 @@ function HomePage() {
   const [playAllClicked, setPlayAllClicked] = useState(false);
   const MAX_WEEK = 12;
 
-  const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = "http://localhost:8080"; // Manuel olarak sabitlendi
 
   // Fetch current week
   useEffect(() => {
@@ -16,7 +16,7 @@ function HomePage() {
       .then(res => res.json())
       .then(({ week }) => setCurrentWeek(week))
       .catch(console.error);
-  }, [API_URL]);
+  }, []);
 
   // Fetch current standings
   useEffect(() => {
@@ -24,7 +24,7 @@ function HomePage() {
       .then(res => res.json())
       .then(setStandings)
       .catch(console.error);
-  }, [API_URL]);
+  }, []);
 
   // Simulate all weeks
   const handlePlayAll = async () => {

@@ -4,15 +4,16 @@ function EditMatchModal({ match, onClose, onSave }) {
   const [homeScore, setHomeScore] = useState(match.home_score);
   const [awayScore, setAwayScore] = useState(match.away_score);
 
+  const API_URL = "http://localhost:8080"; // Manuel sabit URL
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/match/${match.id}`, {
+    const response = await fetch(`${API_URL}/match/${match.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ home_score: homeScore, away_score: awayScore }),
     });
-    
 
     if (response.ok) {
       onSave();

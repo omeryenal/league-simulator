@@ -6,7 +6,7 @@ function PredictionsPage() {
   const [champOdds, setChampOdds] = useState([]);
   const [bettingOdds, setBettingOdds] = useState([]);
 
-  const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = "http://localhost:8080"; // Manuel sabit URL
 
   useEffect(() => {
     fetch(`${API_URL}/predictions`)
@@ -18,7 +18,7 @@ function PredictionsPage() {
       .catch((error) => {
         console.error("Error fetching predictions:", error);
       });
-  }, [API_URL]);
+  }, []); // API_URL sabit olduğu için bağımlılık gerekmez
 
   return (
     <>

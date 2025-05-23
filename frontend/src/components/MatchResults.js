@@ -6,10 +6,12 @@ function MatchResults({ week }) {
   const [editingMatch, setEditingMatch] = useState(null);
   const [newScores, setNewScores] = useState({ home_score: 0, away_score: 0 });
 
+  const API_URL = "http://localhost:8080"; // Manuel olarak sabitlendi
+
   useEffect(() => {
     if (!week) return;
 
-    fetch(`${process.env.REACT_APP_API_URL}/results/week/${week}`)
+    fetch(`${API_URL}/results/week/${week}`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -39,7 +41,7 @@ function MatchResults({ week }) {
   };
 
   const submitEdit = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/match/${editingMatch.id}`, {
+    fetch(`${API_URL}/match/${editingMatch.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newScores),

@@ -15,15 +15,14 @@ function Navigation() {
   const location = useLocation();
   const [week, setWeek] = useState(1);
 
-  // Fetch current league week to decide whether predictions should be available
+  // Fetch current league week directly from localhost backend (no env)
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/week/current`)
+    fetch("http://localhost:8080/week/current")
       .then(res => res.json())
       .then(({ week }) => setWeek(week))
       .catch(console.error);
   }, []);
   
-
   return (
     <nav className="navbar">
       {/* Show Home button if not on the homepage */}
