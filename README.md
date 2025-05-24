@@ -111,4 +111,4 @@ league-simulator/
 🌍 Cloud deployment (Railway, Vercel, or Render)
 🙋‍♂️ Author
 
-Madeby Ömer Yenal
+Made by Ömer Yenal
