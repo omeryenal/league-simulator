@@ -9,7 +9,7 @@ import '../styles/BettingOdds.css';
  * - matches: Array of objects with the following fields:
  *   - home_team, away_team (string)
  *   - home_win_pct, draw_pct, away_win_pct (number, %)
- *   - home_odds, draw_odds, away_odds (float)
+ *   - home_odds, draw_odds, away_odds (float!)
  */
 function BettingOdds({ matches }) {
   if (!matches || matches.length === 0) {
